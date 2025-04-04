@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import requests
+from tabdeal.spot import Spot  # وارد کردن کتابخانه جدید
 
 app = Flask(__name__)
 
@@ -45,12 +46,43 @@ def get_ramzinex_price():
             return formatted_price
     return None
 
+# دریافت قیمت از تبدیل (با استفاده از کتابخانه جدید)
+def get_tabdeal_price():
+    client = Spot()  # ایجاد کلاینت
+    order_book = client.depth(symbol='USDTIRT', limit=1)  # دریافت اطلاعات عمق بازار
+    if order_book:
+        # قیمت فروش (ask) را استخراج می‌کنیم
+        price = order_book['asks'][0][0]
+        return f"{int(float(price)):,}"  # فرمت‌گذاری و تبدیل قیمت به تومان
+    return None
+
+# دریافت قیمت از اوکی اکسچنج
+def get_okex_price():
+    url = 'https://azapi.ok-ex.io/oapi/v1/market/ticker?symbol=USDT-IRT'
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        data = response.json()
+        try:
+            last_price = data['ticker']['last']
+            return f"{float(last_price):,.0f}"
+        except (KeyError, ValueError):
+            return None
+    return None
+
 @app.route('/')
 def home():
     nobitex_price = get_nobitex_price()
     bitpin_price = get_bitpin_price()
     ramzinex_price = get_ramzinex_price()
-    return render_template('index.html', nobitex_price=nobitex_price, bitpin_price=bitpin_price, ramzinex_price=ramzinex_price)
+    tabdeal_price = get_tabdeal_price()  # قیمت از تبدیل
+    okex_price = get_okex_price()  # قیمت از اوکی اکسچنج
+    return render_template('index.html', 
+                           nobitex_price=nobitex_price, 
+                           bitpin_price=bitpin_price, 
+                           ramzinex_price=ramzinex_price, 
+                           tabdeal_price=tabdeal_price,
+                           okex_price=okex_price)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -45,6 +45,16 @@
                             <td id="ramzinex-price">{{ ramzinex_price }}</td>
                             <td><input type="number" class="form-control" id="ramzinex-amount" placeholder="تومان" oninput="calculate('ramzinex')"></td>
                         </tr>
+                        <tr>
+                            <td>تبدیل</td>
+                            <td id="tabdeal-price">{{ tabdeal_price }}</td>
+                            <td><input type="number" class="form-control" id="tabdeal-amount" placeholder="تومان" oninput="calculate('tabdeal')"></td>
+                        </tr>
+                        <tr>
+                            <td>اوکی اکسچنج</td>
+                            <td id="okex-price">{{ okex_price }}</td>
+                            <td><input type="number" class="form-control" id="okex-amount" placeholder="تومان" oninput="calculate('okex')"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -74,15 +84,21 @@
             let nobitex_price = parseFloat(document.getElementById("nobitex-price").innerText);
             let bitpin_price = parseFloat(document.getElementById("bitpin-price").innerText);
             let ramzinex_price = parseFloat(document.getElementById("ramzinex-price").innerText);
+            let tabdeal_price = parseFloat(document.getElementById("tabdeal-price").innerText);
+            let okex_price = parseFloat(document.getElementById("okex-price").innerText);
 
             let nobitex_result = (amount / nobitex_price).toFixed(6);
             let bitpin_result = (amount / bitpin_price).toFixed(6);
             let ramzinex_result = (amount / ramzinex_price).toFixed(6);
+            let tabdeal_result = (amount / tabdeal_price).toFixed(6);
+            let okex_result = (amount / okex_price).toFixed(6);
 
             let results = `
                 <p>نوبیتکس: ${nobitex_result} USDT</p>
                 <p>بیت پین: ${bitpin_result} USDT</p>
                 <p>رمزینکس: ${ramzinex_result} USDT</p>
+                <p>تبدیل: ${tabdeal_result} USDT</p>
+                <p>اوکی اکسچنج: ${okex_result} USDT</p>
             `;
             document.getElementById("results").innerHTML = results;
         }
