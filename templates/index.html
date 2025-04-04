@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arbitrage Checker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+        }
+        table th, table td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">اربیترایزر</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <h3>جدول قیمت‌ها</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>صرافی</th>
+                            <th>قیمت</th>
+                            <th>محاسبه تتر</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>نوبیتکس</td>
+                            <td id="nobitex-price">{{ nobitex_price }}</td>
+                            <td><input type="number" class="form-control" id="nobitex-amount" placeholder="تومان" oninput="calculate('nobitex')"></td>
+                        </tr>
+                        <tr>
+                            <td>بیت پین</td>
+                            <td id="bitpin-price">{{ bitpin_price }}</td>
+                            <td><input type="number" class="form-control" id="bitpin-amount" placeholder="تومان" oninput="calculate('bitpin')"></td>
+                        </tr>
+                        <tr>
+                            <td>رمزینکس</td>
+                            <td id="ramzinex-price">{{ ramzinex_price }}</td>
+                            <td><input type="number" class="form-control" id="ramzinex-amount" placeholder="تومان" oninput="calculate('ramzinex')"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <h3>ماشین حساب</h3>
+                <div class="form-group">
+                    <label for="amount">مقدار (تومان):</label>
+                    <input type="number" class="form-control" id="amount" placeholder="تومان">
+                </div>
+                <button class="btn btn-primary mt-3" onclick="calculateAll()">محاسبه</button>
+                <h4 class="mt-3">نتایج</h4>
+                <div id="results"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculate(exchange) {
+            let price = parseFloat(document.getElementById(exchange + "-price").innerText);
+            let amount = parseFloat(document.getElementById(exchange + "-amount").value);
+            let result = (amount / price).toFixed(6);
+            document.getElementById(exchange + "-result").innerText = result + " USDT";
+        }
+
+        function calculateAll() {
+            let amount = parseFloat(document.getElementById("amount").value);
+            let nobitex_price = parseFloat(document.getElementById("nobitex-price").innerText);
+            let bitpin_price = parseFloat(document.getElementById("bitpin-price").innerText);
+            let ramzinex_price = parseFloat(document.getElementById("ramzinex-price").innerText);
+
+            let nobitex_result = (amount / nobitex_price).toFixed(6);
+            let bitpin_result = (amount / bitpin_price).toFixed(6);
+            let ramzinex_result = (amount / ramzinex_price).toFixed(6);
+
+            let results = `
+                <p>نوبیتکس: ${nobitex_result} USDT</p>
+                <p>بیت پین: ${bitpin_result} USDT</p>
+                <p>رمزینکس: ${ramzinex_result} USDT</p>
+            `;
+            document.getElementById("results").innerHTML = results;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
