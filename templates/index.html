@@ -3,107 +3,764 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arbitrage Checker</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>اربیتاجر</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
     <style>
         body {
             direction: rtl;
             text-align: right;
+            font-family: 'Vazir', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
         }
-        table th, table td {
+        .dark-theme {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .dark-theme .price-table, .dark-theme .card, .dark-theme .results-table, .dark-theme .price-diff-box {
+            background-color: #2c2c2c !important;
+            color: #e0e0e0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: #e0e0e0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-radius: 0 0 10px 10px;
+        }
+        .dark-theme .header {
+            background: #2a2a2a;
+        }
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.2);
+        }
+        .price-table {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: #fff;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .dark-theme .price-table {
+            background: #2c2c2c !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .price-table th {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+        }
+        .price-table td {
+            vertical-align: middle;
+            padding: 10px;
+            border-bottom: 1px solid #dee2e6;
+            background: #fff;
+            color: #333;
+        }
+        .dark-theme .price-table td {
+            border-bottom: 1px solid #444;
+            background: #2c2c2c !important;
+            color: #e0e0e0 !important;
+        }
+        .price-table tbody, .price-table tr {
+            background: #fff;
+        }
+        .dark-theme .price-table tbody, .dark-theme .price-table tr {
+            background: #2c2c2c !important;
+        }
+        .price-table tr:hover {
+            background-color: #f1f1f1;
+        }
+        .dark-theme .price-table tr:hover {
+            background-color: #444 !important;
+        }
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+        .trade-column {
             text-align: center;
+            width: 100px !important;
+            min-width: 100px;
+            max-width: 100px;
+            padding: 5px !important;
+        }
+        .trade-btn {
+            display: inline-block;
+            width: 80px;
+            padding: 4px 6px;
+            background-color: #007bff;
+            color: #fff !important;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 12px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: background-color 0.3s;
+        }
+        .dark-theme .trade-btn {
+            background-color: #1a73e8;
+        }
+        .trade-btn:hover {
+            background-color: #0056b3;
+            color: #fff !important;
+        }
+        .dark-theme .trade-btn:hover {
+            background-color: #4285f4;
+        }
+        .chart-emoji {
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 8px;
+        }
+        .chart-emoji:hover {
+            color: #007bff;
+        }
+        .dark-theme .chart-emoji:hover {
+            color: #1a73e8;
+        }
+        .price-diff-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-size: 16px;
+            color: #333;
+        }
+        .dark-theme .price-diff-box {
+            background: #2c2c2c;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            color: #e0e0e0;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background: #fff;
+        }
+        .dark-theme .card {
+            background: #2c2c2c;
+        }
+        .error-text {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .price-unavailable {
+            color: #dc3545;
+            font-style: italic;
+        }
+        .calculator-buttons .btn {
+            width: 100px;
+            margin: 0 5px;
+        }
+        .calculator-buttons .btn.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .form-group label {
+            color: #333;
+        }
+        .dark-theme .form-group label {
+            color: #e0e0e0;
+        }
+        .form-control {
+            background-color: #fff;
+            color: #333;
+            border: 2px solid #007bff;
+            transition: border-color 0.3s;
+        }
+        .dark-theme .form-control {
+            background-color: #333;
+            color: #e0e0e0;
+            border: 2px solid #007bff;
+        }
+        .form-control::placeholder {
+            color: #6c757d;
+        }
+        .dark-theme .form-control::placeholder {
+            color: #cccccc;
+        }
+        .form-control:focus {
+            border-color: #0056b3;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            animation: fadeIn 0.3s ease-in;
+        }
+        .dark-theme .results-table {
+            background: #2c2c2c !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .results-table th, .results-table td {
+            padding: 10px;
+            text-align: right;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .dark-theme .results-table th, .dark-theme .results-table td {
+            border-bottom: 1px solid #444;
+        }
+        .results-table th {
+            background-color: #007bff;
+            color: white;
+        }
+        .results-table tr:last-child td {
+            border-bottom: none;
+        }
+        .chart-iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+        .amount-text {
+            color: #333;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .dark-theme .amount-text {
+            color: #e0e0e0;
+        }
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+        .loading-spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #007bff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        .dark-theme .loading-spinner {
+            border: 8px solid #444;
+            border-top: 8px solid #1a73e8;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @media (max-width: 768px) {
+            .header {
+                padding: 10px 15px;
+            }
+            .price-table, .card, .results-table {
+                font-size: 14px;
+            }
+            .calculator-buttons .btn {
+                width: 80px;
+                margin: 0 3px;
+            }
+            .trade-column {
+                width: 80px !important;
+                min-width: 80px;
+                max-width: 80px;
+            }
+            .trade-btn {
+                width: 60px;
+                padding: 3px 4px;
+                font-size: 10px;
+            }
+            .chart-emoji {
+                font-size: 14px;
+                margin-right: 5px;
+            }
+            .price-diff-box {
+                font-size: 14px;
+                padding: 10px;
+            }
+            .chart-iframe {
+                height: 300px;
+            }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1 class="my-4">اربیترایزر</h1>
+<body class="dark-theme">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <div class="header">
+        <h3 class="m-0">اربیتاجر</h3>
+        <button class="theme-toggle" id="theme-toggle">☀️</button>
+    </div>
+    <div class="container mt-4">
         <div class="row">
             <div class="col-md-8">
                 <h3>جدول قیمت‌ها</h3>
-                <table class="table table-bordered">
+                <button class="btn btn-outline-primary mb-3" id="sort-price">مرتب‌سازی قیمت (نزولی)</button>
+                <table class="table table-bordered price-table" id="price-table">
                     <thead>
                         <tr>
                             <th>صرافی</th>
                             <th>قیمت</th>
-                            <th>محاسبه تتر</th>
+                            <th class="trade-column">معامله</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="table-body">
+                        <tr data-exchange="nobitex">
                             <td>نوبیتکس</td>
-                            <td id="nobitex-price">{{ nobitex_price }}</td>
-                            <td><input type="number" class="form-control" id="nobitex-amount" placeholder="تومان" oninput="calculate('nobitex')"></td>
+                            <td id="nobitex-price" data-price="{{ nobitex_price or 'نامعتبر' }}">{{ nobitex_price or 'نامعتبر' }}</td>
+                            <td class="trade-column">
+                                <span class="chart-emoji" data-chart-url="https://app.bitycle.com/terminal?market=USDTIRT&source=nobitex_spot" data-exchange-name="نوبیتکس">📈</span>
+                                <a href="https://nobitex.ir/panel/exchange/usdt-irt/" class="trade-btn" target="_blank">نوبیتکس</a>
+                            </td>
                         </tr>
-                        <tr>
+                        <tr data-exchange="bitpin">
                             <td>بیت پین</td>
-                            <td id="bitpin-price">{{ bitpin_price }}</td>
-                            <td><input type="number" class="form-control" id="bitpin-amount" placeholder="تومان" oninput="calculate('bitpin')"></td>
+                            <td id="bitpin-price" data-price="{{ bitpin_price or 'نامعتبر' }}">{{ bitpin_price or 'نامعتبر' }}</td>
+                            <td class="trade-column">
+                                <a href="https://bitpin.ir/trade/USDT_IRT" class="trade-btn" target="_blank">بیت پین</a>
+                            </td>
                         </tr>
-                        <tr>
+                        <tr data-exchange="ramzinex">
                             <td>رمزینکس</td>
-                            <td id="ramzinex-price">{{ ramzinex_price }}</td>
-                            <td><input type="number" class="form-control" id="ramzinex-amount" placeholder="تومان" oninput="calculate('ramzinex')"></td>
+                            <td id="ramzinex-price" data-price="{{ ramzinex_price or 'نامعتبر' }}">{{ ramzinex_price or 'نامعتبر' }}</td>
+                            <td class="trade-column">
+                                <span class="chart-emoji" data-chart-url="https://app.bitycle.com/terminal?market=USDTIRT&source=ramzinex_spot" data-exchange-name="رمزینکس">📈</span>
+                                <a href="https://ramzinex.com/app/markets/11/spot" class="trade-btn" target="_blank">رمزینکس</a>
+                            </td>
                         </tr>
-                        <tr>
+                        <tr data-exchange="tabdeal">
                             <td>تبدیل</td>
-                            <td id="tabdeal-price">{{ tabdeal_price }}</td>
-                            <td><input type="number" class="form-control" id="tabdeal-amount" placeholder="تومان" oninput="calculate('tabdeal')"></td>
+                            <td id="tabdeal-price" data-price="{{ tabdeal_price or 'نامعتبر' }}">{{ tabdeal_price or 'نامعتبر' }}</td>
+                            <td class="trade-column">
+                                <a href="https://tabdeal.org/panel/trade/USDT_IRT" class="trade-btn" target="_blank">تبدیل</a>
+                            </td>
                         </tr>
-                        <tr>
+                        <tr data-exchange="okex">
                             <td>اوکی اکسچنج</td>
-                            <td id="okex-price">{{ okex_price }}</td>
-                            <td><input type="number" class="form-control" id="okex-amount" placeholder="تومان" oninput="calculate('okex')"></td>
+                            <td id="okex-price" data-price="{{ okex_price or 'نامعتبر' }}">{{ okex_price or 'نامعتبر' }}</td>
+                            <td class="trade-column">
+                                <a href="https://ok-ex.io/buy-and-sell/USDT/" class="trade-btn" target="_blank">اوکی اکسچنج</a>
+                            </td>
+                        </tr>
+                        <tr data-exchange="wallex">
+                            <td>والکس</td>
+                            <td id="wallex-price" data-price="{{ wallex_price or 'نامعتبر' }}">{{ wallex_price or 'نامعتبر' }}</td>
+                            <td class="trade-column">
+                                <a href="https://wallex.ir/app/trade/USDTTMN?trade-type=margin&trade-history=margin" class="trade-btn" target="_blank">والکس</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="price-diff-box" id="price-diff-box">
+                    <p id="price-diff-text">اختلاف قیمت: در حال بارگذاری...</p>
+                </div>
             </div>
             <div class="col-md-4">
-                <h3>ماشین حساب</h3>
-                <div class="form-group">
-                    <label for="amount">مقدار (تومان):</label>
-                    <input type="number" class="form-control" id="amount" placeholder="تومان">
+                <div class="card p-4">
+                    <h3>ماشین حساب</h3>
+                    <div class="calculator-buttons mb-3">
+                        <button class="btn btn-outline-primary active" id="usdt-btn">USDT</button>
+                        <button class="btn btn-outline-primary" id="irt-btn">IRT</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount" id="amount-label">مقدار تتر:</label>
+                        <input type="number" class="form-control" id="amount" placeholder="مقدار">
+                        <div id="amount-text" class="amount-text"></div>
+                        <div id="amount-error" class="error-text"></div>
+                    </div>
+                    <button class="btn btn-primary mt-3" id="calculate-btn">محاسبه</button>
+                    <h4 class="mt-3">نتایج</h4>
+                    <div id="results"></div>
                 </div>
-                <button class="btn btn-primary mt-3" onclick="calculateAll()">محاسبه</button>
-                <h4 class="mt-3">نتایج</h4>
-                <div id="results"></div>
             </div>
         </div>
     </div>
 
+    <!-- مودال چارت -->
+    <div class="modal fade" id="chartModal" tabindex="-1" aria-labelledby="chartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="chartModalLabel">چارت</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe class="chart-iframe" id="chartIframe" src=""></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function calculate(exchange) {
-            let price = parseFloat(document.getElementById(exchange + "-price").innerText);
-            let amount = parseFloat(document.getElementById(exchange + "-amount").value);
-            let result = (amount / price).toFixed(6);
-            document.getElementById(exchange + "-result").innerText = result + " USDT";
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            themeToggle.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+        });
+
+        // Cache management
+        const CACHE_KEY = 'prices_cache';
+        const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in milliseconds
+
+        function getCachedPrices() {
+            const cached = localStorage.getItem(CACHE_KEY);
+            if (cached) {
+                const { data, timestamp } = JSON.parse(cached);
+                if (Date.now() - timestamp < CACHE_TTL) {
+                    return data;
+                }
+            }
+            return null;
         }
 
-        function calculateAll() {
-            let amount = parseFloat(document.getElementById("amount").value);
-            let nobitex_price = parseFloat(document.getElementById("nobitex-price").innerText);
-            let bitpin_price = parseFloat(document.getElementById("bitpin-price").innerText);
-            let ramzinex_price = parseFloat(document.getElementById("ramzinex-price").innerText);
-            let tabdeal_price = parseFloat(document.getElementById("tabdeal-price").innerText);
-            let okex_price = parseFloat(document.getElementById("okex-price").innerText);
-
-            let nobitex_result = (amount / nobitex_price).toFixed(6);
-            let bitpin_result = (amount / bitpin_price).toFixed(6);
-            let ramzinex_result = (amount / ramzinex_price).toFixed(6);
-            let tabdeal_result = (amount / tabdeal_price).toFixed(6);
-            let okex_result = (amount / okex_price).toFixed(6);
-
-            let results = `
-                <p>نوبیتکس: ${nobitex_result} USDT</p>
-                <p>بیت پین: ${bitpin_result} USDT</p>
-                <p>رمزینکس: ${ramzinex_result} USDT</p>
-                <p>تبدیل: ${tabdeal_result} USDT</p>
-                <p>اوکی اکسچنج: ${okex_result} USDT</p>
-            `;
-            document.getElementById("results").innerHTML = results;
+        function setCachedPrices(data) {
+            localStorage.setItem(CACHE_KEY, JSON.stringify({
+                data,
+                timestamp: Date.now()
+            }));
         }
+
+        // Sort prices
+        let sortAscending = true;
+        const sortButton = document.getElementById('sort-price');
+
+        function updatePriceDiff() {
+            const prices = [
+                parseFloat(document.getElementById('nobitex-price').dataset.price),
+                parseFloat(document.getElementById('bitpin-price').dataset.price),
+                parseFloat(document.getElementById('ramzinex-price').dataset.price),
+                parseFloat(document.getElementById('tabdeal-price').dataset.price),
+                parseFloat(document.getElementById('okex-price').dataset.price),
+                parseFloat(document.getElementById('wallex-price').dataset.price)
+            ].filter(price => !isNaN(price) && price > 0);
+
+            const diffBox = document.getElementById('price-diff-text');
+
+            if (prices.length < 2) {
+                diffBox.textContent = 'اختلاف قیمت: داده‌ها نامعتبر است';
+                return;
+            }
+
+            const maxPrice = Math.max(...prices);
+            const minPrice = Math.min(...prices);
+            const diff = maxPrice - minPrice;
+            const diffPercentage = ((diff / minPrice) * 100).toFixed(2);
+
+            const formattedDiff = diff.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            diffBox.textContent = `اختلاف قیمت: ${formattedDiff} تومان (${diffPercentage}%)`;
+        }
+
+        function sortPrices() {
+            const tableBody = document.getElementById('table-body');
+            const rows = Array.from(tableBody.querySelectorAll('tr'));
+
+            rows.sort((a, b) => {
+                const priceA = parseFloat(a.querySelector('td:nth-child(2)').dataset.price) || -Infinity;
+                const priceB = parseFloat(b.querySelector('td:nth-child(2)').dataset.price) || -Infinity;
+                return sortAscending ? priceB - priceA : priceA - priceB;
+            });
+
+            sortAscending = !sortAscending;
+            sortButton.textContent = sortAscending ? 'مرتب‌سازی قیمت (نزولی)' : 'مرتب‌سازی قیمت (صعودی)';
+            tableBody.innerHTML = '';
+            rows.forEach(row => tableBody.appendChild(row));
+
+            updatePriceDiff();
+        }
+
+        sortButton.addEventListener('click', sortPrices);
+
+        // Auto-sort on page load (descending)
+        window.addEventListener('load', () => {
+            sortAscending = true;
+            sortPrices();
+        });
+
+        // Auto-update prices
+        function updatePrices() {
+            fetch('/api/prices')
+                .then(response => response.json())
+                .then(data => {
+                    const exchanges = [
+                        { id: 'nobitex', element: document.getElementById('nobitex-price') },
+                        { id: 'bitpin', element: document.getElementById('bitpin-price') },
+                        { id: 'ramzinex', element: document.getElementById('ramzinex-price') },
+                        { id: 'tabdeal', element: document.getElementById('tabdeal-price') },
+                        { id: 'okex', element: document.getElementById('okex-price') },
+                        { id: 'wallex', element: document.getElementById('wallex-price') }
+                    ];
+
+                    exchanges.forEach(exchange => {
+                        const price = data[exchange.id] || 'نامعتبر';
+                        exchange.element.textContent = price;
+                        exchange.element.dataset.price = price !== 'نامعتبر' ? price.replace(/,/g, '') : 'نامعتبر';
+                    });
+
+                    setCachedPrices(data);
+                    sortAscending = true;
+                    sortPrices();
+                    updatePriceDiff();
+
+                    // Hide loading screen after first successful load
+                    const loadingScreen = document.getElementById('loading-screen');
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => loadingScreen.style.display = 'none', 500);
+                })
+                .catch(error => {
+                    console.error('Error updating prices:', error);
+                    document.getElementById('price-diff-text').textContent = 'اختلاف قیمت: خطا در بارگذاری';
+                });
+        }
+
+        // Load cached prices on page load
+        window.addEventListener('load', () => {
+            const cachedPrices = getCachedPrices();
+            if (cachedPrices) {
+                const exchanges = [
+                    { id: 'nobitex', element: document.getElementById('nobitex-price') },
+                    { id: 'bitpin', element: document.getElementById('bitpin-price') },
+                    { id: 'ramzinex', element: document.getElementById('ramzinex-price') },
+                    { id: 'tabdeal', element: document.getElementById('tabdeal-price') },
+                    { id: 'okex', element: document.getElementById('okex-price') },
+                    { id: 'wallex', element: document.getElementById('wallex-price') }
+                ];
+
+                exchanges.forEach(exchange => {
+                    const price = cachedPrices[exchange.id] || 'نامعتبر';
+                    exchange.element.textContent = price;
+                    exchange.element.dataset.price = price !== 'نامعتبر' ? price.replace(/,/g, '') : 'نامعتبر';
+                });
+
+                sortAscending = true;
+                sortPrices();
+                updatePriceDiff();
+            }
+
+            updatePrices(); // Fetch fresh prices
+        });
+
+        // Update prices every 50 seconds
+        setInterval(updatePrices, 50000);
+
+        // Chart modal logic
+        const chartModalElement = document.getElementById('chartModal');
+        const chartModal = new bootstrap.Modal(chartModalElement);
+        const chartIframe = document.getElementById('chartIframe');
+        const chartModalLabel = document.getElementById('chartModalLabel');
+        const chartEmojis = document.querySelectorAll('.chart-emoji');
+
+        chartEmojis.forEach(emoji => {
+            emoji.addEventListener('click', () => {
+                const chartUrl = emoji.getAttribute('data-chart-url');
+                const exchangeName = emoji.getAttribute('data-exchange-name');
+                chartIframe.src = chartUrl;
+                chartModalLabel.textContent = `چارت ${exchangeName}`;
+                chartModal.show();
+            });
+        });
+
+        // Calculator logic
+        let calculationMode = 'usdt';
+
+        function formatNumber(number) {
+            const parts = number.toString().split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return parts.join('.');
+        }
+
+        // Convert number to Persian words
+        function numberToPersianWords(number) {
+            const units = ['', 'هزار', 'میلیون', 'میلیارد', 'تریلیون'];
+            const numbers = [
+                '', 'یک', 'دو', 'سه', 'چهار', 'پنج', 'شش', 'هفت', 'هشت', 'نه',
+                'ده', 'یازده', 'دوازده', 'سیزده', 'چهارده', 'پانزده', 'شانزده', 'هفده', 'هجده', 'نوزده'
+            ];
+            const tens = ['', '', 'بیست', 'سی', 'چهل', 'پنجاه', 'شصت', 'هفتاد', 'هشتاد', 'نود'];
+            const hundreds = ['', 'صد', 'دویست', 'سیصد', 'چهارصد', 'پانصد', 'ششصد', 'هفتصد', 'هشتصد', 'نهصد'];
+
+            if (number === 0) return 'صفر';
+
+            let result = '';
+            let unitIndex = 0;
+
+            while (number > 0) {
+                let chunk = number % 1000;
+                if (chunk > 0) {
+                    let chunkText = '';
+                    let hundred = Math.floor(chunk / 100);
+                    chunk %= 100;
+                    let ten = Math.floor(chunk / 10);
+                    let one = chunk % 10;
+
+                    if (hundred > 0) {
+                        chunkText += hundreds[hundred];
+                        if (ten > 0 || one > 0) chunkText += ' و ';
+                    }
+
+                    if (ten === 1) {
+                        chunkText += numbers[10 + one];
+                    } else {
+                        if (ten > 1) {
+                            chunkText += tens[ten];
+                            if (one > 0) chunkText += ' و ';
+                        }
+                        if (one > 0 && ten !== 1) {
+                            chunkText += numbers[one];
+                        }
+                    }
+
+                    if (unitIndex > 0 && chunkText) {
+                        chunkText += ' ' + units[unitIndex];
+                    }
+
+                    if (result && chunkText) {
+                        result = chunkText + ' و ' + result;
+                    } else {
+                        result = chunkText + result;
+                    }
+                }
+                number = Math.floor(number / 1000);
+                unitIndex++;
+            }
+
+            return result;
+        }
+
+        function updateAmountText() {
+            const amountInput = document.getElementById('amount');
+            const amountText = document.getElementById('amount-text');
+            const amount = parseInt(amountInput.value);
+
+            if (amount > 0 && !isNaN(amount)) {
+                if (calculationMode === 'irt') {
+                    amountText.textContent = `${numberToPersianWords(amount)} تومان`;
+                } else {
+                    amountText.textContent = `${numberToPersianWords(amount)} تتر`;
+                }
+            } else {
+                amountText.textContent = '';
+            }
+        }
+
+        function setCalculationMode(mode) {
+            calculationMode = mode;
+            const usdtBtn = document.getElementById('usdt-btn');
+            const irtBtn = document.getElementById('irt-btn');
+            const amountLabel = document.getElementById('amount-label');
+            const amountInput = document.getElementById('amount');
+
+            if (mode === 'usdt') {
+                usdtBtn.classList.add('active');
+                irtBtn.classList.remove('active');
+                amountLabel.textContent = 'مقدار تتر:';
+                amountInput.placeholder = 'مقدار تتر';
+            } else {
+                irtBtn.classList.add('active');
+                usdtBtn.classList.remove('active');
+                amountLabel.textContent = 'مقدار تومان:';
+                amountInput.placeholder = 'مقدار تومان';
+            }
+
+            amountInput.value = '';
+            document.getElementById('amount-error').textContent = '';
+            document.getElementById('amount-text').textContent = '';
+            document.getElementById('results').innerHTML = '';
+            updateAmountText();
+        }
+
+        function validateInput(amount, errorElement) {
+            errorElement.textContent = '';
+            if (!amount || isNaN(amount) || amount <= 0) {
+                errorElement.textContent = 'مقدار باید عدد مثبت باشد';
+                return false;
+            }
+            return true;
+        }
+
+        function calculate() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const amountError = document.getElementById('amount-error');
+            const resultsElement = document.getElementById('results');
+
+            resultsElement.innerHTML = '';
+
+            if (!validateInput(amount, amountError)) {
+                return;
+            }
+
+            const exchanges = [
+                { id: 'nobitex', name: 'نوبیتکس' },
+                { id: 'bitpin', name: 'بیت پین' },
+                { id: 'ramzinex', name: 'رمزینکس' },
+                { id: 'tabdeal', name: 'تبدیل' },
+                { id: 'okex', name: 'اوکی اکسچنج' },
+                { id: 'wallex', name: 'والکس' }
+            ];
+
+            let results = '<table class="results-table"><thead><tr><th>صرافی</th><th>مقدار</th></tr></thead><tbody>';
+            let hasValidResult = false;
+
+            exchanges.forEach(exchange => {
+                const priceElement = document.getElementById(exchange.id + '-price');
+                const price = parseFloat(priceElement.dataset.price);
+
+                if (!isNaN(price) && price > 0) {
+                    let resultValue;
+                    if (calculationMode === 'usdt') {
+                        resultValue = (amount * price).toFixed(2);
+                        resultValue = formatNumber(resultValue);
+                        resultValue = `${resultValue} تومان`;
+                    } else {
+                        resultValue = (amount / price).toFixed(6);
+                        resultValue = formatNumber(resultValue);
+                        resultValue = `${resultValue} تتر`;
+                    }
+                    results += `<tr><td>${exchange.name}</td><td>${resultValue}</td></tr>`;
+                    hasValidResult = true;
+                }
+            });
+
+            results += '</tbody></table>';
+
+            resultsElement.innerHTML = hasValidResult ? results : "<p class='error-text'>داده‌های قیمت نامعتبر است</p>";
+        }
+
+        // Calculator event listeners
+        document.getElementById('usdt-btn').addEventListener('click', () => setCalculationMode('usdt'));
+        document.getElementById('irt-btn').addEventListener('click', () => setCalculationMode('irt'));
+        document.getElementById('calculate-btn').addEventListener('click', calculate);
+        document.getElementById('amount').addEventListener('input', updateAmountText);
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
