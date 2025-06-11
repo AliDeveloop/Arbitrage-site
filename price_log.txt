@@ -1321,3 +1321,264 @@ Exchange: Okex       | Price: 82,198
 Exchange: Wallex     | Price: 82,508
 ---
 
+--- Log at 2025-06-11 23:23:09 ---
+Exchange: Nobitex    | Price: 82,650
+Exchange: Bitpin     | Price: 82,591
+Exchange: Ramzinex   | Price: 82,558
+Exchange: Tabdeal    | Price: 82,749
+Exchange: Okex       | Price: 82,198
+Exchange: Wallex     | Price: 82,506
+---
+
+--- Log at 2025-06-11 23:23:30 ---
+Exchange: Nobitex    | Price: 82,699
+Exchange: Bitpin     | Price: 82,591
+Exchange: Ramzinex   | Price: 82,558
+Exchange: Tabdeal    | Price: 82,749
+Exchange: Okex       | Price: 82,198
+Exchange: Wallex     | Price: 82,506
+---
+
+--- Log at 2025-06-11 23:23:43 ---
+Exchange: Nobitex    | Price: 82,600
+Exchange: Bitpin     | Price: 82,591
+Exchange: Ramzinex   | Price: 82,521
+Exchange: Tabdeal    | Price: 82,758
+Exchange: Okex       | Price: 82,187
+Exchange: Wallex     | Price: 82,506
+---
+
+--- Log at 2025-06-11 23:23:59 ---
+Exchange: Nobitex    | Price: 82,600
+Exchange: Bitpin     | Price: 82,591
+Exchange: Ramzinex   | Price: 82,521
+Exchange: Tabdeal    | Price: 82,758
+Exchange: Okex       | Price: 82,187
+Exchange: Wallex     | Price: 82,506
+---
+
+--- Log at 2025-06-11 23:24:13 ---
+Exchange: Nobitex    | Price: 82,697
+Exchange: Bitpin     | Price: 82,591
+Exchange: Ramzinex   | Price: 82,521
+Exchange: Tabdeal    | Price: 82,756
+Exchange: Okex       | Price: 82,187
+Exchange: Wallex     | Price: 82,506
+---
+
+--- Log at 2025-06-11 23:25:09 ---
+Exchange: Nobitex    | Price: 82,602
+Exchange: Bitpin     | Price: 82,591
+Exchange: Ramzinex   | Price: 82,646
+Exchange: Tabdeal    | Price: 82,756
+Exchange: Okex       | Price: 82,187
+Exchange: Wallex     | Price: 82,571
+---
+
+--- Log at 2025-06-11 23:25:59 ---
+Exchange: Nobitex    | Price: 82,650
+Exchange: Bitpin     | Price: 82,591
+Exchange: Ramzinex   | Price: 82,646
+Exchange: Tabdeal    | Price: 82,761
+Exchange: Okex       | Price: 82,228
+Exchange: Wallex     | Price: 82,568
+---
+
+--- Log at 2025-06-11 23:26:14 ---
+Exchange: Nobitex    | Price: 82,651
+Exchange: Bitpin     | Price: 82,591
+Exchange: Ramzinex   | Price: 82,646
+Exchange: Tabdeal    | Price: 82,830
+Exchange: Okex       | Price: 82,228
+Exchange: Wallex     | Price: 82,568
+---
+
+--- Log at 2025-06-11 23:26:28 ---
+Exchange: Nobitex    | Price: 82,651
+Exchange: Bitpin     | Price: 82,591
+Exchange: Ramzinex   | Price: 82,646
+Exchange: Tabdeal    | Price: 82,830
+Exchange: Okex       | Price: 82,228
+Exchange: Wallex     | Price: 82,568
+---
+
+--- Log at 2025-06-11 23:26:43 ---
+Exchange: Nobitex    | Price: 82,690
+Exchange: Bitpin     | Price: 82,591
+Exchange: Ramzinex   | Price: 82,646
+Exchange: Tabdeal    | Price: 82,830
+Exchange: Okex       | Price: 82,228
+Exchange: Wallex     | Price: 82,567
+---
+
+--- Log at 2025-06-11 23:26:58 ---
+Exchange: Nobitex    | Price: 82,700
+Exchange: Bitpin     | Price: 82,591
+Exchange: Ramzinex   | Price: 82,646
+Exchange: Tabdeal    | Price: 82,878
+Exchange: Okex       | Price: 82,228
+Exchange: Wallex     | Price: 82,567
+---
+
+--- Log at 2025-06-11 23:27:13 ---
+Exchange: Nobitex    | Price: 82,692
+Exchange: Bitpin     | Price: 82,593
+Exchange: Ramzinex   | Price: 82,646
+Exchange: Tabdeal    | Price: 82,878
+Exchange: Okex       | Price: 82,228
+Exchange: Wallex     | Price: 82,567
+---
+
+--- Log at 2025-06-11 23:28:09 ---
+Exchange: Nobitex    | Price: 82,692
+Exchange: Bitpin     | Price: 82,688
+Exchange: Ramzinex   | Price: 82,681
+Exchange: Tabdeal    | Price: 82,843
+Exchange: Okex       | Price: 82,269
+Exchange: Wallex     | Price: 82,635
+---
+
+--- Log at 2025-06-11 23:29:09 ---
+Exchange: Nobitex    | Price: 82,691
+Exchange: Bitpin     | Price: 82,688
+Exchange: Ramzinex   | Price: 82,681
+Exchange: Tabdeal    | Price: 82,843
+Exchange: Okex       | Price: 82,278
+Exchange: Wallex     | Price: 82,626
+---
+
+--- Log at 2025-06-11 23:30:09 ---
+Exchange: Nobitex    | Price: 82,699
+Exchange: Bitpin     | Price: 82,688
+Exchange: Ramzinex   | Price: 82,682
+Exchange: Tabdeal    | Price: 82,843
+Exchange: Okex       | Price: 82,278
+Exchange: Wallex     | Price: 82,600
+---
+
+--- Log at 2025-06-11 23:31:09 ---
+Exchange: Nobitex    | Price: 82,699
+Exchange: Bitpin     | Price: 82,687
+Exchange: Ramzinex   | Price: 82,681
+Exchange: Tabdeal    | Price: 82,843
+Exchange: Okex       | Price: 82,278
+Exchange: Wallex     | Price: 82,619
+---
+
+--- Log at 2025-06-11 23:31:59 ---
+Exchange: Nobitex    | Price: 82,675
+Exchange: Bitpin     | Price: 82,633
+Exchange: Ramzinex   | Price: 82,682
+Exchange: Tabdeal    | Price: 82,866
+Exchange: Okex       | Price: 82,285
+Exchange: Wallex     | Price: 82,613
+---
+
+--- Log at 2025-06-11 23:32:13 ---
+Exchange: Nobitex    | Price: 82,675
+Exchange: Bitpin     | Price: 82,633
+Exchange: Ramzinex   | Price: 82,682
+Exchange: Tabdeal    | Price: 82,861
+Exchange: Okex       | Price: 82,285
+Exchange: Wallex     | Price: 82,455
+---
+
+--- Log at 2025-06-11 23:32:28 ---
+Exchange: Nobitex    | Price: 82,676
+Exchange: Bitpin     | Price: 82,633
+Exchange: Ramzinex   | Price: 82,682
+Exchange: Tabdeal    | Price: 82,854
+Exchange: Okex       | Price: 82,285
+Exchange: Wallex     | Price: 82,613
+---
+
+--- Log at 2025-06-11 23:32:43 ---
+Exchange: Nobitex    | Price: 82,687
+Exchange: Bitpin     | Price: 82,688
+Exchange: Ramzinex   | Price: 82,682
+Exchange: Tabdeal    | Price: 82,857
+Exchange: Okex       | Price: 82,285
+Exchange: Wallex     | Price: 82,613
+---
+
+--- Log at 2025-06-11 23:32:58 ---
+Exchange: Nobitex    | Price: 82,690
+Exchange: Bitpin     | Price: 82,680
+Exchange: Ramzinex   | Price: 82,682
+Exchange: Tabdeal    | Price: 82,857
+Exchange: Okex       | Price: 82,285
+Exchange: Wallex     | Price: 82,612
+---
+
+--- Log at 2025-06-11 23:34:00 ---
+Exchange: Nobitex    | Price: 82,726
+Exchange: Bitpin     | Price: 82,700
+Exchange: Ramzinex   | Price: 82,682
+Exchange: Tabdeal    | Price: 82,890
+Exchange: Okex       | Price: 82,295
+Exchange: Wallex     | Price: 82,612
+---
+
+--- Log at 2025-06-11 23:34:45 ---
+Exchange: Nobitex    | Price: 82,705
+Exchange: Bitpin     | Price: 82,750
+Exchange: Ramzinex   | Price: 82,812
+Exchange: Tabdeal    | Price: 82,893
+Exchange: Okex       | Price: 82,295
+Exchange: Wallex     | Price: 82,610
+---
+
+--- Log at 2025-06-11 23:34:58 ---
+Exchange: Nobitex    | Price: 82,705
+Exchange: Bitpin     | Price: 82,750
+Exchange: Ramzinex   | Price: 82,812
+Exchange: Tabdeal    | Price: 82,890
+Exchange: Okex       | Price: 82,295
+Exchange: Wallex     | Price: 82,613
+---
+
+--- Log at 2025-06-11 23:35:15 ---
+Exchange: Nobitex    | Price: 82,725
+Exchange: Bitpin     | Price: 82,750
+Exchange: Ramzinex   | Price: 82,812
+Exchange: Tabdeal    | Price: 82,874
+Exchange: Okex       | Price: 82,295
+Exchange: Wallex     | Price: 82,619
+---
+
+--- Log at 2025-06-11 23:35:28 ---
+Exchange: Nobitex    | Price: 82,732
+Exchange: Bitpin     | Price: 82,750
+Exchange: Ramzinex   | Price: 82,813
+Exchange: Tabdeal    | Price: 82,874
+Exchange: Okex       | Price: 82,295
+Exchange: Wallex     | Price: 82,619
+---
+
+--- Log at 2025-06-11 23:35:44 ---
+Exchange: Nobitex    | Price: 82,703
+Exchange: Bitpin     | Price: 82,787
+Exchange: Ramzinex   | Price: 82,813
+Exchange: Tabdeal    | Price: 82,874
+Exchange: Okex       | Price: 82,295
+Exchange: Wallex     | Price: 82,619
+---
+
+--- Log at 2025-06-11 23:36:09 ---
+Exchange: Nobitex    | Price: 82,730
+Exchange: Bitpin     | Price: 82,787
+Exchange: Ramzinex   | Price: 82,813
+Exchange: Tabdeal    | Price: 82,874
+Exchange: Okex       | Price: 82,295
+Exchange: Wallex     | Price: 82,619
+---
+
+--- Log at 2025-06-11 23:36:48 ---
+Exchange: Nobitex    | Price: 82,726
+Exchange: Bitpin     | Price: 82,787
+Exchange: Ramzinex   | Price: 82,813
+Exchange: Tabdeal    | Price: 82,874
+Exchange: Okex       | Price: 82,295
+Exchange: Wallex     | Price: 82,699
+---
+
