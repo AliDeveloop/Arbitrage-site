@@ -1,4 +1,6 @@
 Flask
 requests
-cachetools 
-tabdeal-python
+cachetools
+tabdeal
+jdatetime
+gunicorn
